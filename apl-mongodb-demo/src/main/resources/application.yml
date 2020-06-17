@@ -1,0 +1,17 @@
+server:
+  port: 9210
+
+spring:
+  application:
+    name: apl-mongodb-demo
+  data:
+    mongodb:
+      host: 110.43.51.23
+      port: 27017
+      database: mongo
+      username:
+      password:
+      option:
+        socket-keep-alive: true
+        socket-timeout: 30000
+      uri: 110.43.51.23:27017

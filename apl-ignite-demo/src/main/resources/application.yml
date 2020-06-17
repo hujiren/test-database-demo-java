@@ -1,0 +1,16 @@
+server:
+  port: 9230
+
+spring:
+  datasource:
+    data-username:
+    data-password:
+    url: jdbc:ignite:thin://110.43.51.23:10800
+    driver-class-name: org.apache.ignite.IgniteJdbcThinDriver
+    druid:
+      validation-query: SELECT 1
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
