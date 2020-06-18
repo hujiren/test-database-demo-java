@@ -10,8 +10,8 @@
         <module name="apl-ignite-demo" />
         <module name="apl-postgres-demo" />
         <module name="apl-mongodb-lib" />
-        <module name="apl-mongodb-demo" />
         <module name="ignite" />
+        <module name="apl-mongodb-demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
