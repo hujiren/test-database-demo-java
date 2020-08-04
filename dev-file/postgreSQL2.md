@@ -17,6 +17,7 @@
            
 6.修改配置: vim /var/lib/postgresql/data/pg_hba.conf
            在IPv4 local connections: 下面添加: host  all     all     0.0.0.0/0       ident(表示需要密码校验)
+           
 
 7.如果修改后的配置文件路径发生变化
 
