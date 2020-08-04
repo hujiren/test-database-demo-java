@@ -20,8 +20,6 @@
            
 
 7.如果修改后的配置文件路径发生变化
-
-需要明确指定用户的新数据路径 
 chown -R postgres:postgres /<new directory>  
 chown -R postgres:postgres /usr/local/data  
  
