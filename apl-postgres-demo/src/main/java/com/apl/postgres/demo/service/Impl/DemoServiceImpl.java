@@ -55,7 +55,7 @@ public class DemoServiceImpl implements DemoService {
             pgData.setDriver(driver);
             pgData.setPayment(payment);
 
-            pgWayBill.setName("王五");
+            pgWayBill.setPgName("王五");
             pgWayBill.setPgData(pgData);
             pgWayBill.setId(6);
 
@@ -65,7 +65,7 @@ public class DemoServiceImpl implements DemoService {
         }
 
 
-        return demoMapper.insertDemo(pgWayBill.getId(), pgWayBill.getName(), str);
+        return demoMapper.insertDemo(pgWayBill.getId(), pgWayBill.getPgName(), str);
     }
 
 
@@ -89,7 +89,7 @@ public class DemoServiceImpl implements DemoService {
             pgData.setDriver(driver);
             pgData.setPayment(payment);
 
-            pgWayBill.setName("乔巴");
+            pgWayBill.setPgName("乔巴");
             pgWayBill.setPgData(pgData);
             pgWayBill.setId(1);
 
@@ -97,6 +97,6 @@ public class DemoServiceImpl implements DemoService {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return demoMapper.updateDemo(pgWayBill.getId(), pgWayBill.getName(), str);
+        return demoMapper.updateDemo(pgWayBill.getId(), pgWayBill.getPgName(), str);
     }
 }

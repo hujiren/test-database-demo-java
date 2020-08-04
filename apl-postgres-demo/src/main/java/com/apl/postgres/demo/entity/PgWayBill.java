@@ -15,7 +15,7 @@ public class PgWayBill implements Serializable {
     @TableId
     private Integer id;
 
-    private String name;
+    private String pgName;
 
     private PgData pgData;
 

@@ -7,19 +7,17 @@ git status
   git add .
 
 ## 连接git库
-   git remote add origin git https://github.com/arranapl/apl-mogodb-java.git
-
-
-
+   git remote add origin https://github.com/arranapl/apl-mogodb-java.git
+    
+    
 提交描述
 
   git commit -m " " .
 
 
 从git库拉取代码
-  git pull origin master
+  git pull -f origin master
 
-github: apl0219  aa0219pp
 合并代码
    自动合并
    解决冲突  vcs/git
@@ -27,7 +25,7 @@ github: apl0219  aa0219pp
 
 推送代码到git库
   git push -u origin master
-
+  git push -f origin master
 
 
 

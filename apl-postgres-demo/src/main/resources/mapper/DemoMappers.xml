@@ -5,19 +5,19 @@
     <resultMap id="BaseResultMap" type="com.apl.postgres.demo.entity.PgWayBill">
         <id column="id" property="id"/>
         <result column="pg_data" property="pgData" javaType="Object" typeHandler="com.apl.postgres.demo.utils.JsonTypeHandlerPg"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pg_name" property="pgName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="findDemo" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select id, pg_data, name from j_waybill where id = #{id};
+        select id, pg_data, pg_name from j_waybill where id = #{id};
     </select>
 
     <insert id="insertDemo"  statementType="CALLABLE" parameterType="com.apl.postgres.demo.entity.PgWayBill">
-        insert into j_waybill(id, pg_data, name) values(#{id}, #{data, typeHandler=com.apl.postgres.demo.utils.JsonTypeHandlerPg}, #{name});
+        insert into j_waybill(id, pg_data, pg_name) values(#{id}, #{data, typeHandler=com.apl.postgres.demo.utils.JsonTypeHandlerPg}, #{name});
     </insert>
 
     <update id="updateDemo" >
-        update j_waybill set name = #{name}, pg_data = #{data, typeHandler=com.apl.postgres.demo.utils.JsonTypeHandlerPg}
+        update j_waybill set pg_name = #{name}, pg_data = #{data, typeHandler=com.apl.postgres.demo.utils.JsonTypeHandlerPg}
         where id = #{id};
     </update>
 </mapper>
