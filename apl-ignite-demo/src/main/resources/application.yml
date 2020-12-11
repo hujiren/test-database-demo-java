@@ -1,16 +1,22 @@
-server:
-  port: 9230
 
 spring:
-  datasource:
-    data-username:
-    data-password:
-    url: jdbc:ignite:thin://110.43.51.23:10800
-    driver-class-name: org.apache.ignite.IgniteJdbcThinDriver
-    druid:
-      validation-query: SELECT 1
+  application:
+    name: apl-ignite-demo
 
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true
-  mapper-locations: classpath:mapper/*.xml
+  profiles:
+    include:
+      common, apl-ignite-demo
+
+  #  main:
+  #    allow-bean-definition-overriding:true
+
+#  datasource:
+#    druid:
+#      validation-query: SELECT 1
+#      max-pool-prepared-statement-per-connection-size: 200
+#      driver-class-name: org.apache.ignite.IgniteJdbcThinDriver
+#      url: jdbc:ignite:thin://192.168.1.185:10800/IGNITE
+#      data-username: ignite
+#      data-password: ignite
+#    schema: db/schema.sql
+#    data: classpath:db/data.sql

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd
+                     http://www.springframework.org/schema/util
+                     http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--
+        Alter configuration below as needed.
+    -->
+
+    <!--外部存储数据库-->
+    <bean class="com.mysql.cj.jdbc.MysqlDataSource" id="mysqlDataSource">
+        <property name="URL" value="jdbc:mysql://192.168.1.185:3307/test"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean id="grid.cfg" class="org.apache.ignite.configuration.IgniteConfiguration">
+        <property name="dataStorageConfiguration">
+            <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+                <property name="defaultDataRegionConfiguration">
+                    <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+                        <!--开启持久化-->
+                        <property name="persistenceEnabled" value="true"/>
+
+                        <!--内存区域名称-->
+                        <property name="name" value="vehicle_Region"/>
+                        <!-- 2G initial size. 初始大小2G-->
+                        <property name="initialSize" value="#{4L * 1024 * 1024 * 1024}"/>
+                        <!-- 4G maximum size. -->
+                        <property name="maxSize" value="#{8L * 1024 * 1024 * 1024}"/>
+
+                        <!-- 堆外内存退出算法 -->
+                        <property name="pageEvictionMode" value="RANDOM_2_LRU"/>
+                    </bean>
+                </property>
+
+            </bean>
+        </property>
+
+
+        <!--缓存配置+外部存储配置+持久化配置-->
+        <property name="cacheConfiguration">
+            <bean class="org.apache.ignite.configuration.CacheConfiguration">
+
+                <!--缓存名称-->
+                <property name="name" value="priceZone"/>
+
+                <!--缓存模式-->
+                <property name="cacheMode" value="REPLICATED"/>
+
+                <!--热生存  缓存过期立刻清除-->
+                <property name="eagerTtl" value="true"/>
+
+                <!--缓存备份分区数量-->
+                <property name="backups" value="2"/>
+
+                <!--控制再平衡执行方式-->
+                <property name="rebalanceMode" value="SYNC"/>
+
+                <!--写同步模式:主数据和备份数据保持一致-->
+                <property name="writeSynchronizationMode" value="FULL_SYNC"/>
+
+                <!--分区丢失策略:READ_WRITE_SAFE缓存丢失分区的读写尝试都会抛出异常，但是在线分区的读写是正常的。-->
+                <property name="partitionLossPolicy" value="READ_ONLY_SAFE"/>
+  
+                <!--原子化操作-->
+                <property name="atomicityMode" value="TRANSACTIONAL"/>
+
+                <!--通读-->
+                <property name="readThrough" value="true"/>
+
+                <!--通写-->
+                <property name="writeThrough" value="true"/>
+
+                <!--外部存储-->
+                <property name="cacheStoreFactory">
+                    <bean class="org.apache.ignite.cache.store.jdbc.CacheJdbcPojoStoreFactory">
+
+                        <property name="dataSourceBean" value="mysqlDataSource"/>
+
+                        <property name="dialect">
+                            <bean class="org.apache.ignite.cache.store.jdbc.dialect.MySQLDialect"/>
+                        </property>
+
+                        <property name="types">
+                            <list>
+                                <bean class="org.apache.ignite.cache.store.jdbc.JdbcType">
+                                    <!--缓存名称-->
+                                    <property name="cacheName" value="priceZone"/>
+
+                                    <!--缓存key类型-->
+                                    <property name="keyType" value="java.lang.Long"/>
+
+                                    <!--缓存值类型-->
+                                    <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNameVo"/>
+
+                                    <!--数据库表明-->
+                                    <property name="databaseTable" value="price_zone_name"/>
+
+                                    <!--配置key字段映射-->
+                                    <property name="keyFields">
+
+                                        <list>
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.BIGINT"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="id"/>
+                                                <constructor-arg value="long"/>
+                                                <constructor-arg value="id"/>
+                                            </bean>
+                                        </list>
+                                    </property>
+
+                                    <!--配置属性字段映射-->
+                                    <property name="valueFields">
+                                        <list>
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.BIGINT" />
+                                                </constructor-arg>
+                                                <constructor-arg value="id"/>
+                                                <constructor-arg value="long"/>
+                                                <constructor-arg value="id"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR" />
+                                                </constructor-arg>
+                                                <constructor-arg value="channel_category"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="channelCategory"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="address"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="address"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="telephone"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="telephone"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="first_name"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="firstName"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="remark"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="remark"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="code"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="code"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.TIMESTAMP"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="start_date"/>
+                                                <constructor-arg value="java.sql.Timestamp"/>
+                                                <constructor-arg value="startDate"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.TIMESTAMP"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="end_date"/>
+                                                <constructor-arg value="java.sql.Timestamp"/>
+                                                <constructor-arg value="endDate"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.DOUBLE"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="balance"/>
+                                                <constructor-arg value="java.lang.Double"/>
+                                                <constructor-arg value="balance"/>
+                                            </bean>
+                                        </list>
+                                    </property>
+
+
+                                </bean>
+                            </list>
+                        </property>
+
+                    </bean>
+                </property>
+
+                <!--Sql查询的查询实体-->
+                <property name="queryEntities">
+                    <list>
+                        <bean class="org.apache.ignite.cache.QueryEntity">
+
+                            <!--key类型-->
+                            <property name="keyType" value="java.lang.Long"/>
+
+                            <!--实体类类型-->
+                            <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNameVo"/>
+
+                            <!--key字段名-->
+                            <property name="keyFieldName" value="id"/>
+
+                            <!--key字段-->
+                            <property name="keyFields">
+                                <list>
+                                    <value>id</value>
+                                </list>
+                            </property>
+
+                            <!--实体类字段-->
+                            <property name="fields">
+                                <map>
+                                    <entry key="id" value="long"/>
+                                    <entry key="channel_category" value="java.lang.String"/>
+                                    <entry key="address" value="java.lang.String"/>
+                                    <entry key="telephone" value="java.lang.String"/>
+                                    <entry key="first_name" value="java.lang.String"/>
+                                    <entry key="remark" value="java.lang.String"/>
+                                    <entry key="code" value="java.lang.String"/>
+                                    <entry key="start_date" value="java.sql.Timestamp"/>
+                                    <entry key="end_date" value="java.sql.Timestamp"/>
+                                    <entry key="balance" value="java.lang.Double"/>
+                                </map>
+                            </property>
+
+                        </bean>
+                    </list>
+                </property>
+
+            </bean>
+        </property>
+
+
+        <!-- 开启身份验证,开启后,Ignite会创建一个用户名、密码均为 ignite 的用户账户 -->
+        <property name="authenticationEnabled" value="true"/>
+    </bean>
+</beans>

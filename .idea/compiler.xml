@@ -7,15 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="apl-ignite-pojo" />
         <module name="apl-ignite-demo" />
-        <module name="apl-postgres-demo" />
-        <module name="apl-mongodb-lib" />
-        <module name="apl-mongodb-demo" />
-        <module name="ignite" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="apl-ignite-demo" target="1.5" />
+      <module name="apl-mongodb-demo" target="8" />
+      <module name="apl-mongodb-lib" target="1.5" />
+      <module name="apl-postgres-demo" target="1.8" />
       <module name="apl-postgresSQL-demo" target="1.5" />
     </bytecodeTargetLevel>
   </component>
@@ -25,7 +24,6 @@
       <module name="apl-mongodb-demo" options="-parameters" />
       <module name="apl-mongodb-lib" options="" />
       <module name="apl-postgres-demo" options="-parameters" />
-      <module name="ignite" options="-parameters" />
     </option>
   </component>
 </project>

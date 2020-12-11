@@ -1,7 +1,12 @@
 package com.apl.ignite.demo.controller;
-import com.apl.ignite.demo.entity.Student;
+import com.apl.ignite.demo.entity.PriceZoneNameVo;
+import com.apl.ignite.demo.entity.TestPo;
 import com.apl.ignite.demo.service.IgniteService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,34 +17,37 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/ignite")
+@Api(value = "ignite",tags = "ignite")
 public class IgniteController {
 
     @Autowired
     private IgniteService igniteService;
 
-    @ResponseBody
-    @RequestMapping(value = "/select")
-    public Student queryStu(Integer id){
+    @PostMapping(value = "/select")
+    public void queryStu(Long num){
 
-        return igniteService.queryStu(id);
+        igniteService.queryStu(num);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/update")
-    public Integer updateStu(){
-        return igniteService.updateStu();
+    @PostMapping(value = "/update")
+    @ApiImplicitParam(name = "num", value = "num", paramType = "query", required = true)
+    public Integer updateStu(Long num){
+        return igniteService.updateStu(num);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/insert")
+    @PostMapping(value = "/insert")
     public Integer insertStu(){
         return igniteService.insertStu();
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/delete")
+    @PostMapping(value = "/delete")
     public Integer deleteStu(Integer id){
         return igniteService.deleteStu(id);
     }
 
+    @PostMapping("/add")
+    @ApiOperation(value = "添加", notes = "添加")
+    public void add(PriceZoneNameVo priceZoneNameVo){
+        igniteService.add(priceZoneNameVo);
+    }
 }

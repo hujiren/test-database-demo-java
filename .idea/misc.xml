@@ -8,10 +8,14 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/apl-ignite-pojo/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/apl-mongodb-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/apl-mongodb-lib/pom.xml" />
+        <option value="$PROJECT_DIR$/apl-postgres-demo/pom.xml" />
         <option value="$PROJECT_DIR$/apl-postgresSQL-demo/pom.xml" />
       </set>
     </option>
