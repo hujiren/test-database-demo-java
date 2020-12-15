@@ -111,7 +111,6 @@ public class IgniteCacheBean {
         //缓存模式, PARTITIONED:整体数据被拆分为分区,所有的分区再以平衡的方式分布于相关节点上, REPLICATED:所有的数据在所有的节点上都复制一份
         cacheCfg2.setCacheMode(CacheMode.REPLICATED);
 
-
         //原子化模式:ATOMIC:所有操作都会原子化执行, 一次一个,不支持事务,但是提供更好的性能,pulAll这种批量操作不能被事务支持
         //TRANSACTIONAL:在键-值API层面开启了符合ACID的事务支持,但是SQL不支持事务。
         //TRANSACTIONAL_SNAPSHOT:多版本并发控制,其同时支持键-值事务和SQL事务

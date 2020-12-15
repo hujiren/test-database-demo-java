@@ -58,6 +58,15 @@
             </bean>
         </property>
 
+        <property name="sqlConfiguration">
+            <bean class="org.apache.ignite.configuration.SqlConfiguration">
+                <property name="sqlSchemas">
+                    <list>
+                        <value>test</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
 
         <!--缓存配置+外部存储配置+持久化配置-->
         <property name="cacheConfiguration">
@@ -92,7 +101,9 @@
 
                 <!--通写-->
                 <property name="writeThrough" value="true"/>
-
+                
+                <property name="sqlSchema" value="test"/>
+                
                 <!--外部存储-->
                 <property name="cacheStoreFactory">
                     <bean class="org.apache.ignite.cache.store.jdbc.CacheJdbcPojoStoreFactory">
@@ -112,7 +123,7 @@
                                     <!--缓存key类型-->
                                     <property name="keyType" value="java.lang.Long"/>
 
-                                    <!--缓存值类型-->
+                                    <!--缓存实体类-->
                                     <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNamePo"/>
 
                                     <!--数据库表名-->

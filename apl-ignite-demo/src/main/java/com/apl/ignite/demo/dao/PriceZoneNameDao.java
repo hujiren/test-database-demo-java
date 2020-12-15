@@ -28,6 +28,7 @@ public class PriceZoneNameDao {
 
     final String tabName = "PriceZoneNamePo";
     final String cacheName = "price_zone_name";
+    final String schemaName = "TEST";//schemaName  大写
 
     public void createTab(){
         String sql = "CREATE TABLE "+tabName+" (\n" +
@@ -96,7 +97,7 @@ public class PriceZoneNameDao {
 
 
     public void mySelect(){
-        List<Map<String, Object>> list = nameJdbcTemplate.queryForList("SELECT * FROM \"" + cacheName + "\"." + tabName + ";", new HashMap<>());
+        List<Map<String, Object>> list = nameJdbcTemplate.queryForList("SELECT * FROM \"" + schemaName + "\"." + tabName + ";", new HashMap<>());
         //已执行put(), 但使用Sql查询表的结果为空
         System.out.println("select()方法执行");
         System.out.println(list.toString());
