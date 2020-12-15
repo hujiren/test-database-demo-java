@@ -1,6 +1,6 @@
 package com.apl.ignite.demo.config;
 
-import com.apl.ignite.demo.entity.PriceZoneNameVo;
+import com.apl.ignite.demo.entity.PriceZoneNamePo;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteException;
@@ -88,7 +88,7 @@ public class IgniteCacheBean {
 
 
         //外部存储 + 缓存
-        CacheConfiguration<String, PriceZoneNameVo> cacheCfg2 = new CacheConfiguration<>();
+        CacheConfiguration<String, PriceZoneNamePo> cacheCfg2 = new CacheConfiguration<>();
 
         //缓存的备份分区数量
         cacheCfg2.setBackups(2);
@@ -119,7 +119,7 @@ public class IgniteCacheBean {
         cacheCfg2.setReadThrough(true);//通写和通读不能与TRANSACTIONAL_SNAPSHOT原子化模式一起使用
         cacheCfg2.setWriteThrough(true);
 
-        CacheJdbcPojoStoreFactory<String, PriceZoneNameVo> factory = new CacheJdbcPojoStoreFactory<>();
+        CacheJdbcPojoStoreFactory<String, PriceZoneNamePo> factory = new CacheJdbcPojoStoreFactory<>();
         factory.setDialect(new MySQLDialect());
         factory.setDataSourceFactory((Factory<DataSource>)() -> {
             MysqlDataSource mysqlDataSrc = new MysqlDataSource();
@@ -133,7 +133,7 @@ public class IgniteCacheBean {
         zoneType.setCacheName("apl-cache");
         zoneType.setKeyType(Long.class);
 
-        zoneType.setValueType(PriceZoneNameVo.class);
+        zoneType.setValueType(PriceZoneNamePo.class);
 
         zoneType.setDatabaseTable("price_zone_name");
 
@@ -164,7 +164,7 @@ public class IgniteCacheBean {
         qryEntity.setKeyType(Long.class.getName());
         qryEntity.setKeyFieldName("id");
 
-        qryEntity.setValueType(PriceZoneNameVo.class.getName());
+        qryEntity.setValueType(PriceZoneNamePo.class.getName());
 
         Set<String> keyFields = new HashSet<>();
         keyFields.add("id");

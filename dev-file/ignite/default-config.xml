@@ -64,7 +64,7 @@
             <bean class="org.apache.ignite.configuration.CacheConfiguration">
 
                 <!--缓存名称-->
-                <property name="name" value="priceZone"/>
+                <property name="name" value="price_zone_name"/>
 
                 <!--缓存模式-->
                 <property name="cacheMode" value="REPLICATED"/>
@@ -107,15 +107,15 @@
                             <list>
                                 <bean class="org.apache.ignite.cache.store.jdbc.JdbcType">
                                     <!--缓存名称-->
-                                    <property name="cacheName" value="priceZone"/>
+                                    <property name="cacheName" value="price_zone_name"/>
 
                                     <!--缓存key类型-->
                                     <property name="keyType" value="java.lang.Long"/>
 
                                     <!--缓存值类型-->
-                                    <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNameVo"/>
+                                    <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNamePo"/>
 
-                                    <!--数据库表明-->
+                                    <!--数据库表名-->
                                     <property name="databaseTable" value="price_zone_name"/>
 
                                     <!--配置key字段映射-->
@@ -149,33 +149,6 @@
                                                 <constructor-arg>
                                                     <util:constant static-field="java.sql.Types.VARCHAR" />
                                                 </constructor-arg>
-                                                <constructor-arg value="channel_category"/>
-                                                <constructor-arg value="java.lang.String"/>
-                                                <constructor-arg value="channelCategory"/>
-                                            </bean>
-
-                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
-                                                <constructor-arg>
-                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
-                                                </constructor-arg>
-                                                <constructor-arg value="address"/>
-                                                <constructor-arg value="java.lang.String"/>
-                                                <constructor-arg value="address"/>
-                                            </bean>
-
-                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
-                                                <constructor-arg>
-                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
-                                                </constructor-arg>
-                                                <constructor-arg value="telephone"/>
-                                                <constructor-arg value="java.lang.String"/>
-                                                <constructor-arg value="telephone"/>
-                                            </bean>
-
-                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
-                                                <constructor-arg>
-                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
-                                                </constructor-arg>
                                                 <constructor-arg value="first_name"/>
                                                 <constructor-arg value="java.lang.String"/>
                                                 <constructor-arg value="firstName"/>
@@ -185,6 +158,33 @@
                                                 <constructor-arg>
                                                     <util:constant static-field="java.sql.Types.VARCHAR"/>
                                                 </constructor-arg>
+                                                <constructor-arg value="country"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="country"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="address"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="address"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="telephone"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="telephone"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
                                                 <constructor-arg value="remark"/>
                                                 <constructor-arg value="java.lang.String"/>
                                                 <constructor-arg value="remark"/>
@@ -194,18 +194,27 @@
                                                 <constructor-arg>
                                                     <util:constant static-field="java.sql.Types.VARCHAR"/>
                                                 </constructor-arg>
-                                                <constructor-arg value="code"/>
+                                                <constructor-arg value="city"/>
                                                 <constructor-arg value="java.lang.String"/>
-                                                <constructor-arg value="code"/>
+                                                <constructor-arg value="city"/>
                                             </bean>
 
                                             <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
                                                 <constructor-arg>
-                                                    <util:constant static-field="java.sql.Types.TIMESTAMP"/>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
                                                 </constructor-arg>
-                                                <constructor-arg value="start_date"/>
-                                                <constructor-arg value="java.sql.Timestamp"/>
-                                                <constructor-arg value="startDate"/>
+                                                <constructor-arg value="id_num"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="idNum"/>
+                                            </bean>
+
+                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                <constructor-arg>
+                                                    <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                </constructor-arg>
+                                                <constructor-arg value="company"/>
+                                                <constructor-arg value="java.lang.String"/>
+                                                <constructor-arg value="company"/>
                                             </bean>
 
                                             <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
@@ -215,15 +224,6 @@
                                                 <constructor-arg value="end_date"/>
                                                 <constructor-arg value="java.sql.Timestamp"/>
                                                 <constructor-arg value="endDate"/>
-                                            </bean>
-
-                                            <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
-                                                <constructor-arg>
-                                                    <util:constant static-field="java.sql.Types.DOUBLE"/>
-                                                </constructor-arg>
-                                                <constructor-arg value="balance"/>
-                                                <constructor-arg value="java.lang.Double"/>
-                                                <constructor-arg value="balance"/>
                                             </bean>
                                         </list>
                                     </property>
@@ -242,10 +242,10 @@
                         <bean class="org.apache.ignite.cache.QueryEntity">
 
                             <!--key类型-->
-                            <property name="keyType" value="java.lang.Long"/>
+                            <property name="keyType" value="long"/>
 
                             <!--实体类类型-->
-                            <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNameVo"/>
+                            <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNamePo"/>
 
                             <!--key字段名-->
                             <property name="keyFieldName" value="id"/>
@@ -261,15 +261,15 @@
                             <property name="fields">
                                 <map>
                                     <entry key="id" value="long"/>
-                                    <entry key="channel_category" value="java.lang.String"/>
+                                    <entry key="first_name" value="java.lang.String"/>
+                                    <entry key="country" value="java.lang.String"/>
                                     <entry key="address" value="java.lang.String"/>
                                     <entry key="telephone" value="java.lang.String"/>
-                                    <entry key="first_name" value="java.lang.String"/>
                                     <entry key="remark" value="java.lang.String"/>
-                                    <entry key="code" value="java.lang.String"/>
-                                    <entry key="start_date" value="java.sql.Timestamp"/>
+                                    <entry key="city" value="java.lang.String"/>
+                                    <entry key="id_num" value="java.lang.String"/>
+                                    <entry key="company" value="java.lang.String"/>
                                     <entry key="end_date" value="java.sql.Timestamp"/>
-                                    <entry key="balance" value="java.lang.Double"/>
                                 </map>
                             </property>
 

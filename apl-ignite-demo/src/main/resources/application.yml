@@ -1,5 +1,30 @@
 
+server:
+  port: 9230
+
 spring:
+  datasource:
+    druid:
+      validation-query: SELECT 1
+      driver-class-name: org.apache.ignite.IgniteJdbcThinDriver
+      url: jdbc:ignite:thin://192.168.1.185:10800
+      username: ignite
+      password: ignite
+
+mybatis-plus:
+  pagination:
+    pagination-enable: false
+    tenant-enable: false #此项目不开启多租户
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+apl:
+  swagger:
+    title: apl-ignite
+    description: apl-ignite
+    basePackage: com.apl.ignite.demo.controller
+
+#spring:
   application:
     name: apl-ignite-demo
 
@@ -9,14 +34,3 @@ spring:
 
   #  main:
   #    allow-bean-definition-overriding:true
-
-#  datasource:
-#    druid:
-#      validation-query: SELECT 1
-#      max-pool-prepared-statement-per-connection-size: 200
-#      driver-class-name: org.apache.ignite.IgniteJdbcThinDriver
-#      url: jdbc:ignite:thin://192.168.1.185:10800/IGNITE
-#      data-username: ignite
-#      data-password: ignite
-#    schema: db/schema.sql
-#    data: classpath:db/data.sql

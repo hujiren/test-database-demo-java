@@ -1,6 +1,6 @@
 package com.apl.ignite.demo.mapper;
 
-import com.apl.ignite.demo.entity.TestPo;
+import com.apl.ignite.demo.entity.PriceZoneNamePo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface TestMapper extends BaseMapper<TestPo> {
+public interface PriceZoneNameMapper extends BaseMapper<PriceZoneNamePo> {
 }

@@ -1,6 +1,6 @@
 package com.apl.ignite.demo.service;
 
-import com.apl.ignite.demo.entity.TestPo;
+import com.apl.ignite.demo.entity.PriceZoneNamePo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,15 +9,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @Date 2020/12/11 16:15
  */
 
-public interface TestService extends IService<TestPo> {
+public interface PriceZoneNameService extends IService<PriceZoneNamePo> {
 
     void createTab();
 
-    void add(TestPo testPo);
+    void add(Long forEachNum);
 
     void del(int id);
 
-    TestPo mySelect();
+    PriceZoneNamePo mySelect();
 
-    TestPo get(int id);
+    PriceZoneNamePo get(Long id);
 }

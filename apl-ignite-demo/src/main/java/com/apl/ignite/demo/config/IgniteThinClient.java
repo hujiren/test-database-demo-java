@@ -1,5 +1,6 @@
 package com.apl.ignite.demo.config;
 
+import org.apache.ignite.Ignite;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.client.IgniteClient;
 import org.apache.ignite.configuration.ClientConfiguration;
@@ -8,6 +9,9 @@ import org.apache.ignite.configuration.IgniteConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author hjr start
@@ -41,7 +45,6 @@ public class IgniteThinClient {
         ClientConfiguration clientConfiguration = new ClientConfiguration();
         clientConfiguration.setAddresses("192.168.1.185:10800").setUserName("ignite").setUserPassword("ignite").setPartitionAwarenessEnabled(true);//分区感知
         IgniteClient igniteClient = Ignition.startClient(clientConfiguration);//igniteClient对象提供了访问数据的各种方法
-
 
 //        Ignite ignite = Ignition.start(cfg);
         return igniteClient;
