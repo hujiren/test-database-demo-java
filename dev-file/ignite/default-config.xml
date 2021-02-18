@@ -71,15 +71,14 @@
         <!--缓存配置+外部存储配置+持久化配置-->
         <property name="cacheConfiguration">
             <bean class="org.apache.ignite.configuration.CacheConfiguration">
-
                 <!--缓存名称-->
-                <property name="name" value="price_zone_name"/>
+                <property name="name" value="student"/>
 
                 <!--缓存模式-->
                 <property name="cacheMode" value="REPLICATED"/>
 
                 <!--热生存  缓存过期立刻清除-->
-                <property name="eagerTtl" value="true"/>
+                <property name="eagerTtl" value="false"/>
 
                 <!--缓存备份分区数量-->
                 <property name="backups" value="2"/>
@@ -100,34 +99,35 @@
                 <property name="readThrough" value="true"/>
 
                 <!--通写-->
-                <property name="writeThrough" value="true"/>
-                
+                <property name="writeThrough" value="false"/>
+
+                <!--持久化后写-->
+                <property name="writeBehindEnabled" value="false"/>
+
                 <property name="sqlSchema" value="test"/>
-                
+
+
                 <!--外部存储-->
                 <property name="cacheStoreFactory">
                     <bean class="org.apache.ignite.cache.store.jdbc.CacheJdbcPojoStoreFactory">
-
                         <property name="dataSourceBean" value="mysqlDataSource"/>
-
                         <property name="dialect">
                             <bean class="org.apache.ignite.cache.store.jdbc.dialect.MySQLDialect"/>
                         </property>
-
                         <property name="types">
                             <list>
                                 <bean class="org.apache.ignite.cache.store.jdbc.JdbcType">
                                     <!--缓存名称-->
-                                    <property name="cacheName" value="price_zone_name"/>
+                                    <property name="cacheName" value="student"/>
 
                                     <!--缓存key类型-->
                                     <property name="keyType" value="java.lang.Long"/>
 
                                     <!--缓存实体类-->
-                                    <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNamePo"/>
+                                    <property name="valueType" value="com.apl.ignite.demo.entity.student"/>
 
                                     <!--数据库表名-->
-                                    <property name="databaseTable" value="price_zone_name"/>
+                                    <property name="databaseTable" value="student"/>
 
                                     <!--配置key字段映射-->
                                     <property name="keyFields">
@@ -256,7 +256,7 @@
                             <property name="keyType" value="long"/>
 
                             <!--实体类类型-->
-                            <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNamePo"/>
+                            <property name="valueType" value="com.apl.ignite.demo.entity.student"/>
 
                             <!--key字段名-->
                             <property name="keyFieldName" value="id"/>
@@ -287,6 +287,9 @@
                         </bean>
                     </list>
                 </property>
+
+
+
 
             </bean>
         </property>

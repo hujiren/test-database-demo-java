@@ -7,8 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="apl-ignite-pojo" />
         <module name="apl-ignite-demo" />
+        <module name="apl-ignite-pojo" />
+        <module name="apl-ignite-driver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

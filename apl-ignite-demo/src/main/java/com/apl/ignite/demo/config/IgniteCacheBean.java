@@ -1,6 +1,6 @@
 package com.apl.ignite.demo.config;
 
-import com.apl.ignite.demo.entity.PriceZoneNamePo;
+import com.apl.ignite.demo.entity.student;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteException;
@@ -11,6 +11,7 @@ import org.apache.ignite.cache.store.jdbc.JdbcType;
 import org.apache.ignite.cache.store.jdbc.JdbcTypeField;
 import org.apache.ignite.cache.store.jdbc.dialect.MySQLDialect;
 import org.apache.ignite.configuration.*;
+import org.springframework.stereotype.Component;
 
 import javax.cache.configuration.Factory;
 import javax.sql.DataSource;
@@ -26,6 +27,7 @@ import java.util.Set;
  * @Classname IgniteCacheBean
  * @Date 2020/12/8 15:04
  */
+//@Component
 public class IgniteCacheBean {
 
     public Ignite igniteBean(){
@@ -88,11 +90,16 @@ public class IgniteCacheBean {
 
 
         //外部存储 + 缓存
-        CacheConfiguration<String, PriceZoneNamePo> cacheCfg2 = new CacheConfiguration<>();
+        CacheConfiguration<String, student> cacheCfg2 = new CacheConfiguration<>();
 
         //缓存的备份分区数量
         cacheCfg2.setBackups(2);
-
+//        cacheCfg2.setWriteBehindBatchSize();
+//        cacheCfg2.setWriteBehindCoalescing();
+//        cacheCfg2.setWriteBehindEnabled();
+//        cacheCfg2.setWriteBehindFlushFrequency();
+//        cacheCfg2.setWriteBehindFlushSize();
+//        cacheCfg2.setWriteBehindFlushThreadCount();
         //控制再平衡执行方式 SYNC:所有缓存操作都会被阻塞知道再平衡结束  ASYNC:再平衡在后台执行  NONE:再平衡不会被触发
         cacheCfg2.setRebalanceMode(CacheRebalanceMode.SYNC);
 
@@ -118,7 +125,7 @@ public class IgniteCacheBean {
         cacheCfg2.setReadThrough(true);//通写和通读不能与TRANSACTIONAL_SNAPSHOT原子化模式一起使用
         cacheCfg2.setWriteThrough(true);
 
-        CacheJdbcPojoStoreFactory<String, PriceZoneNamePo> factory = new CacheJdbcPojoStoreFactory<>();
+        CacheJdbcPojoStoreFactory<String, student> factory = new CacheJdbcPojoStoreFactory<>();
         factory.setDialect(new MySQLDialect());
         factory.setDataSourceFactory((Factory<DataSource>)() -> {
             MysqlDataSource mysqlDataSrc = new MysqlDataSource();
@@ -132,9 +139,9 @@ public class IgniteCacheBean {
         zoneType.setCacheName("apl-cache");
         zoneType.setKeyType(Long.class);
 
-        zoneType.setValueType(PriceZoneNamePo.class);
+        zoneType.setValueType(student.class);
 
-        zoneType.setDatabaseTable("price_zone_name");
+        zoneType.setDatabaseTable("student");
 
         zoneType.setKeyFields(new JdbcTypeField(java.sql.Types.BIGINT, "id", Long.class, "id"));
 
@@ -163,7 +170,7 @@ public class IgniteCacheBean {
         qryEntity.setKeyType(Long.class.getName());
         qryEntity.setKeyFieldName("id");
 
-        qryEntity.setValueType(PriceZoneNamePo.class.getName());
+        qryEntity.setValueType(student.class.getName());
 
         Set<String> keyFields = new HashSet<>();
         keyFields.add("id");

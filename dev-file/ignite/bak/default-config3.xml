@@ -197,7 +197,7 @@
                                       <property name="valueType" value="com.apl.ignite.demo.entity.PriceZoneNameVo"/>
 
                                       <!--数据库表明-->
-                                      <property name="databaseTable" value="price_zone_name"/>
+                                      <property name="databaseTable" value="student"/>
 
                                       <!--配置key字段映射-->
                                       <property name="keyFields">

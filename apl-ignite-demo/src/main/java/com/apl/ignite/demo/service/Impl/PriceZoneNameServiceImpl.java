@@ -1,7 +1,7 @@
 package com.apl.ignite.demo.service.Impl;
 
 import com.apl.ignite.demo.dao.PriceZoneNameDao;
-import com.apl.ignite.demo.entity.PriceZoneNamePo;
+import com.apl.ignite.demo.entity.student;
 import com.apl.ignite.demo.mapper.PriceZoneNameMapper;
 import com.apl.ignite.demo.service.PriceZoneNameService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @Date 2020/12/11 16:23
  */
 @Service
-public class PriceZoneNameServiceImpl extends ServiceImpl<PriceZoneNameMapper, PriceZoneNamePo> implements PriceZoneNameService {
+public class PriceZoneNameServiceImpl extends ServiceImpl<PriceZoneNameMapper, student> implements PriceZoneNameService {
 
     @Autowired
     PriceZoneNameDao priceZoneNameDao;
@@ -26,9 +26,9 @@ public class PriceZoneNameServiceImpl extends ServiceImpl<PriceZoneNameMapper, P
     }
 
     @Override
-    public void add(Long forEachNum) {
+    public void add(Long forEachNum, String val) {
 
-        priceZoneNameDao.put(forEachNum);
+        priceZoneNameDao.put(forEachNum, val);
     }
 
 
@@ -38,14 +38,14 @@ public class PriceZoneNameServiceImpl extends ServiceImpl<PriceZoneNameMapper, P
     }
 
     @Override
-    public PriceZoneNamePo mySelect() {
+    public student mySelect() {
 
         priceZoneNameDao.mySelect();
         return null;
     }
 
     @Override
-    public PriceZoneNamePo get(Long id) {
+    public student get(Long id) {
 
         priceZoneNameDao.get(id);
         return null;

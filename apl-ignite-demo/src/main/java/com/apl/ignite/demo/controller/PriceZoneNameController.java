@@ -1,6 +1,6 @@
 package com.apl.ignite.demo.controller;
 
-import com.apl.ignite.demo.entity.PriceZoneNamePo;
+import com.apl.ignite.demo.entity.student;
 import com.apl.ignite.demo.service.PriceZoneNameService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -23,6 +23,9 @@ public class PriceZoneNameController {
     @Autowired
     PriceZoneNameService priceZoneNameService;
 
+//    @Autowired
+//    ListenerStudent listenerStudent;
+
     @PostMapping("/createTab")
     @ApiOperation(value = "createTab", notes = "createTab")
     public void createTab(){
@@ -31,8 +34,8 @@ public class PriceZoneNameController {
 
     @PostMapping("/add")
     @ApiOperation(value = "添加", notes = "添加")
-    public void add(Long forEachNum){
-        priceZoneNameService.add(forEachNum);
+    public void add(Long forEachNum, String val) throws Exception {
+        priceZoneNameService.add(forEachNum, val);
     }
 
     @PostMapping("/del")
@@ -44,14 +47,23 @@ public class PriceZoneNameController {
 
     @PostMapping("/query")
     @ApiOperation(value = "查询", notes = "查询")
-    public PriceZoneNamePo query(){
+    public student query(){
         return priceZoneNameService.mySelect();
     }
 
     @PostMapping("/get")
     @ApiOperation(value = "获取详细", notes = "获取详细")
     @ApiImplicitParam(name = "id", value = "id", paramType = "query", required = true)
-    public PriceZoneNamePo get(Long id){
+    public student get(Long id){
         return priceZoneNameService.get(id);
     }
+
+//    @PostMapping("/listen")
+//    @ApiOperation(value = "listenerStudent", notes = "listenerStudent")
+//    public String listen(){
+//
+//        listenerStudent.startListener();
+//
+//        return "start Listener student";
+//    }
 }
