@@ -1,3 +1,9 @@
+git config user.name 查看用户名
+git config user.email 查看邮箱
+git config --global user.name "" 切换用户
+git config --global user.email "" 切换邮箱
+
+
 查看
 git status
 
