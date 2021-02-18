@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SpringBootIgniteApplication {
 
     public static void main(String[] args) {
-
+        
         SpringApplication.run(SpringBootIgniteApplication.class, args);
 
     }
